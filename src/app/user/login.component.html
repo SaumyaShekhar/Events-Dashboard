@@ -1,0 +1,26 @@
+<h1>Login</h1>
+<hr>
+<div class="col-md-4">
+    <!-- loginForm local variable -->
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off" novalidate>
+    <div class="form-group" >
+      <label for="userName">User Name:</label>
+      <em *ngIf="loginForm.controls.userName?.invalid && (loginForm.controls.userName?.touched || mouseoverLogin)">Required</em>
+        <!-- [{}] called as Banana in the box style binding. This is also knows as two ways binding. If you will notice, you will realize that we use () binding when we want something in HTML to component direction ex click handler-->
+        <!-- We use [] bracket when we want the model binding from component to HtML ex - data binding-->
+        <input (ngModel)="userName" name="userName" id="userName" type="text" required class="form-control" placeholder="User Name..." />
+    </div>
+    <div class="form-group" >
+      <label for="password">Password:</label>
+      <em *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLogin)">Required</em>
+      <input (ngModel)="password" name="password" id="password" type="password" required class="form-control"placeholder="Password..." />
+    </div>
+    
+    <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
+    </span>
+    <button type="button" class="btn btn-default">Cancel</button>
+  </form>
+  <br>
+  <div *ngIf="loginInvalid" class="alert alert-danger">Invalid Login Info</div>
+</div>
